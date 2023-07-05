@@ -6,9 +6,18 @@
           content="width=device-width, initial-scale=1.0">
     <title>Яндекс.Дом</title>
     <link rel="preload" as="font" href="assets/lato.woff2" type="font/woff2" crossorigin="anonymous">
-    <script src="vendors/react-with-dom.js"></script>
+    <script src="vendors/react-with-dom.js" defer ></script>
+    <script defer src="vendors/babel.min.js"></script>
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <link rel="preload" as="image" href="assets/icon_sun.svg">
+    <link rel="preload" as="image" href="assets/icon_sun_2.svg">
+    <link rel="preload" as="image" href="assets/cloud-drizzle.svg">
+    <link rel="preload" as="image" href="assets/icon_temperature.svg">
+    <link rel="preload" as="image" href="assets/icon_temperature_2.svg">
+    <link rel="preload" as="image" href="assets/logo.svg">
+    <link rel="preload" as="image" href="assets/icon_scheduled.svg">
 </head>
 <body>
 
@@ -35,7 +44,6 @@
     </div>
 </footer>
 
-<script src="vendors/babel.min.js"></script>
 <script type="text/babel">
     function Header() {
         let [expanded, setExpanded] = React.useState(false);
@@ -222,9 +230,9 @@
         };
 
         let sumWidth = 0;
-        const onSize = React.useCallback((size) => {
-            sumWidth += size.width;
-        }, [TABS, activeTab]);
+        const onSize = size => {
+            sumWidth += size.width
+        };
 
         React.useEffect(() => {
             const newHasRightScroll = sumWidth > ref.current.offsetWidth;
