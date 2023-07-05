@@ -201,9 +201,7 @@
             }]
         }
     };
-    for (let i = 0; i < 6; ++i) {
-        TABS.all.items = [...TABS.all.items, ...TABS.all.items];
-    }
+    TABS.all.items = Array(64).fill(TABS.all.items).flat();
     const TABS_KEYS = Object.keys(TABS);
 
     function Main() {
@@ -223,15 +221,12 @@
             setActiveTab(event.target.value);
         };
 
-        let sizes = [];
+        let sumWidth = 0;
         const onSize = size => {
-            sizes = [...sizes, size];
+            sumWidth += size.width
         };
 
         React.useEffect(() => {
-            const sumWidth = sizes.reduce((acc, item) => acc + item.width, 0);
-            const sumHeight = sizes.reduce((acc, item) => acc + item.height, 0);
-
             const newHasRightScroll = sumWidth > ref.current.offsetWidth;
             if (newHasRightScroll !== hasRightScroll) {
                 setHasRightScroll(newHasRightScroll);
@@ -393,7 +388,7 @@
         </main>;
     }
 
-    setTimeout(() => {
+ 
         const root = ReactDOM.createRoot(document.getElementById('app'));
         root.render(
             <>
@@ -401,7 +396,6 @@
                 <Main />
             </>
         );
-    }, 100);
 </script>
 
 </body>
