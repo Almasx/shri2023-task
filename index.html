@@ -222,9 +222,9 @@
         };
 
         let sumWidth = 0;
-        const onSize = size => {
-            sumWidth += size.width
-        };
+        const onSize = React.useCallback((size) => {
+            sumWidth += size.width;
+        }, [TABS, activeTab]);
 
         React.useEffect(() => {
             const newHasRightScroll = sumWidth > ref.current.offsetWidth;
